@@ -5,10 +5,18 @@ export function startRouter(store) {
 
     // update state on url change
     const router = new Router({
-        "/document/:documentId": (id) => store.showDocument(id),
-        "/document/": () => store.showOverview()
+        // "/question/:questionId": (id) => store.showDocument(id),
+
+        "/intro/": () => store.showIntro(),
+        "/section/:sectionId/question/:questionId": (sectionId, questionId) => store.showSection(sectionId, questionId),
+
+
+        //  pass ^this^ a string or something to generate a unique route for user results
+        // on the client side rather than sending stuff back to the server. better for mobile use
+        // less reliance on the server too
+
     }).configure({
-        notfound: () => store.showOverview(),
+        notfound: () => store.showIntro(),
         html5history: true
     }).init()
 
